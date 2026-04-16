@@ -1,0 +1,9 @@
+{
+  "functions": {
+    "api/save-data.js": {
+      "memory": 128,
+      "maxDuration": 10
+    }
+  }
+  }
+
