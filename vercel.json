@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "api/save-data.js": {
+      "memory": 128,
+      "maxDuration": 10
+    }
+  },
+  "api": {
+    "bodyParser": {
+      "sizeLimit": "2mb"
+    }
+  }
+}

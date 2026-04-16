@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Face Pareidolia Experiment</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="ctx-instruction">
+
+  <!-- ── SCREEN 1: Consent ── -->
+  <div id="screen-consent" class="screen active">
+    <div class="card wide">
+      <h1>Informed Consent</h1>
+      <div class="consent-text">
+        <p>You are invited to participate in a cognitive science study investigating how people perceive faces in ambiguous images. The study is conducted by researchers at the University.</p>
+        <p><strong>What you will do:</strong> You will view a series of images and decide whether each contains a face or not, pressing <kbd>F</kbd> (Face) or <kbd>J</kbd> (No Face). The task takes approximately 20–25 minutes.</p>
+        <p><strong>Risks:</strong> There are no known risks. The task involves only standard computer-based stimuli.</p>
+        <p><strong>Confidentiality:</strong> Your data will be anonymized. No personally identifying information is collected beyond a randomly generated participant ID.</p>
+        <p><strong>Voluntary participation:</strong> Participation is entirely voluntary. You may withdraw at any time without penalty.</p>
+        <p><strong>Data use:</strong> Anonymized data may be used in scientific publications and shared in public repositories.</p>
+        <p>By clicking "I Agree", you confirm that you have read this information, are 18 years or older, and consent to participate.</p>
+      </div>
+      <div class="btn-row">
+        <button id="btn-consent-agree" class="btn btn-primary">I Agree &amp; Continue</button>
+        <button id="btn-consent-decline" class="btn btn-secondary">Decline</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SCREEN 2: Eligibility ── -->
+  <div id="screen-eligibility" class="screen">
+    <div class="card">
+      <h2>Eligibility Check</h2>
+      <p>Please answer the following questions. All must be "Yes" to proceed.</p>
+      <form id="form-eligibility">
+        <div class="elig-item">
+          <p>1. Are you between 18 and 35 years of age?</p>
+          <label><input type="radio" name="e1" value="yes" required /> Yes</label>
+          <label><input type="radio" name="e1" value="no" /> No</label>
+        </div>
+        <div class="elig-item">
+          <p>2. Do you have normal or corrected-to-normal vision?</p>
+          <label><input type="radio" name="e2" value="yes" required /> Yes</label>
+          <label><input type="radio" name="e2" value="no" /> No</label>
+        </div>
+        <div class="elig-item">
+          <p>3. Do you have no history of neurological or psychiatric disorders?</p>
+          <label><input type="radio" name="e3" value="yes" required /> Yes</label>
+          <label><input type="radio" name="e3" value="no" /> No</label>
+        </div>
+        <div class="elig-item">
+          <p>4. Are you able to read and understand the task instructions in English?</p>
+          <label><input type="radio" name="e4" value="yes" required /> Yes</label>
+          <label><input type="radio" name="e4" value="no" /> No</label>
+        </div>
+        <div class="btn-row">
+          <button type="submit" class="btn btn-primary">Continue</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── SCREEN 3: Participant ID ── -->
+  <div id="screen-participant-id" class="screen">
+    <div class="card">
+      <h2>Your Participant ID</h2>
+      <p>A unique ID has been generated for this session. Please write it down — you may need it to withdraw your data later.</p>
+      <div class="pid-display" id="pid-display">—</div>
+      <p class="hint">This ID is anonymous. It does not contain any personal information.</p>
+      <div class="btn-row">
+        <button id="btn-pid-continue" class="btn btn-primary">Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SCREEN 4: BFI Extraversion ── -->
+  <div id="screen-bfi" class="screen">
+    <div class="card wide">
+      <h2>Personality Questionnaire</h2>
+      <p>Please rate how well each statement describes you. Use the scale below.</p>
+      <div class="likert-legend">
+        <span>1 = Disagree strongly</span>
+        <span>2 = Disagree a little</span>
+        <span>3 = Neutral</span>
+        <span>4 = Agree a little</span>
+        <span>5 = Agree strongly</span>
+      </div>
+      <form id="form-bfi">
+        <div id="bfi-items-container"></div>
+        <div class="btn-row">
+          <button type="submit" class="btn btn-primary">Continue</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── SCREEN 5: Task Instructions ── -->
+  <div id="screen-task-instructions" class="screen">
+    <div class="card wide">
+      <h2>Task Instructions</h2>
+      <p>In this experiment, you will see a series of images. Your task is to decide as quickly and accurately as possible whether each image contains a <strong>face</strong>.</p>
+      <div class="key-map">
+        <div class="key-box">
+          <span class="key">F</span>
+          <span class="key-label">Face</span>
+        </div>
+        <div class="key-box">
+          <span class="key">J</span>
+          <span class="key-label">No Face</span>
+        </div>
+      </div>
+      <ul>
+        <li>Each image appears briefly. Respond before it disappears (3 seconds).</li>
+        <li>The experiment has <strong>4 blocks</strong> of 40 trials each (160 trials total).</li>
+        <li>Each block has specific instructions — read them carefully at the start of each block.</li>
+        <li>Some blocks emphasize <strong>speed</strong>; others emphasize <strong>accuracy</strong>.</li>
+        <li>Some blocks have more face images; others have fewer.</li>
+        <li>You will start with a <strong>5-trial practice</strong> with feedback.</li>
+        <li>The experiment will run in <strong>full-screen mode</strong>. Please do not exit full screen.</li>
+        <li>Use a <strong>keyboard</strong>. Touch input is not supported.</li>
+      </ul>
+      <div id="touch-warning" class="warning" style="display:none">
+        ⚠ This experiment requires a physical keyboard. Touch devices are not supported.
+      </div>
+      <div class="btn-row">
+        <button id="btn-task-instr-continue" class="btn btn-primary">Start Practice</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SCREEN 6: Practice Instructions ── -->
+  <div id="screen-practice-instructions" class="screen">
+    <div class="card">
+      <h2>Practice Trials</h2>
+      <p>You are about to complete <strong>5 practice trials</strong>.</p>
+      <p>After each response you will see feedback (Correct / Incorrect / Too slow).</p>
+      <p>Press <kbd>F</kbd> for <strong>Face</strong> and <kbd>J</kbd> for <strong>No Face</strong>.</p>
+      <p>When you are ready, press <strong>Space</strong> or click below to begin.</p>
+      <div class="btn-row">
+        <button id="btn-practice-start" class="btn btn-primary">Begin Practice</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SCREEN 7 / 9: Trial ── -->
+  <div id="screen-trial" class="screen">
+    <div id="trial-progress" class="trial-progress"></div>
+    <div id="fixation" class="fixation" style="display:none">+</div>
+    <img id="stimulus-img" class="stimulus-img" src="" alt="stimulus" style="display:none" />
+    <div id="feedback-overlay" class="feedback-overlay" style="display:none"></div>
+    <div id="fullscreen-overlay" class="fullscreen-overlay" style="display:none">
+      <div class="card">
+        <p>Full-screen mode was exited.</p>
+        <button id="btn-reenter-fs" class="btn btn-primary">Re-enter Full Screen</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SCREEN 8: Block Instructions ── -->
+  <div id="screen-block-instructions" class="screen">
+    <div class="card">
+      <h2 id="block-instr-title">Block</h2>
+      <div id="block-instr-emphasis" class="block-badge"></div>
+      <div id="block-instr-body"></div>
+      <p id="block-instr-counter" class="hint"></p>
+      <div class="btn-row">
+        <button id="btn-block-start" class="btn btn-primary">Begin Block</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SCREEN 10: End ── -->
+  <div id="screen-end" class="screen">
+    <div class="card wide">
+      <h2>Experiment Complete</h2>
+      <p>Thank you for participating! Your data has been recorded.</p>
+      <div id="save-status" class="save-status"></div>
+      <div class="btn-row">
+        <button id="btn-download-json" class="btn btn-secondary">Download JSON</button>
+        <button id="btn-download-csv" class="btn btn-secondary">Download CSV</button>
+      </div>
+      <p class="hint">Your participant ID: <strong id="end-pid"></strong></p>
+    </div>
+  </div>
+
+  <!-- ── SCREEN 11: Terminated ── -->
+  <div id="screen-terminated" class="screen">
+    <div class="card">
+      <h2>Thank You</h2>
+      <p>Based on your responses, you do not meet the eligibility criteria for this study.</p>
+      <p>We appreciate your interest. You may close this window.</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
